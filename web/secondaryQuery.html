@@ -113,7 +113,7 @@
                     <!--<a class="btn btn-primary btn-xs" onclick=""><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 导入</a>-->
                     <a class="btn btn-primary btn-xs" id="function_-310" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; exportExcel(e);}"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 导出</a>
                     <a class="btn btn-primary btn-xs" id="function_-311" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; DeclareGeneration(e);}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 生成次生库存申报</a>
-                    <a class="btn btn-primary btn-xs" href="secondaryWastesSummary.html" onclick=""><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> 收发汇总表</a>
+                    <a class="btn btn-primary btn-xs" id="function_-593" href="secondaryWastesSummary.html" onclick="checkAuthority($(this))"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> 收发汇总表</a>
                 </div>
                 <!--<div class="input-group col-md-3">-->
                     <!--<input type="text" name="" id="input" value="" placeholder="请输入查询关键字" onkeyup="search1()"/>-->
@@ -209,18 +209,18 @@
                             <input class="checkbox" type="checkbox" value="option1" aria-label="..." name="allSel" id="allSel" onclick="allSelect()">
                         </label>
                     </th>
-                    <th class="text-center">入库单号</th>
-                    <th class="text-center">入库日期</th>
-                    <th class="text-center">产废单位</th>
-                    <th class="text-center">仓库名称</th>
+                    <th class="text-center" onclick="sortTable(this,'')">入库单号</th>
+                    <th class="text-center" onclick="sortTable(this,'')">入库日期</th>
+                    <th class="text-center" onclick="sortTable(this,'')">产废单位</th>
+                    <th class="text-center" onclick="sortTable(this,'')">仓库名称</th>
                     <!--<th class="text-center">进料方式</th>-->
-                    <th class="text-center">危废名称</th>
-                    <th class="text-center">危废类型</th>
+                    <th class="text-center" onclick="sortTable(this,'')">危废名称</th>
+                    <th class="text-center" onclick="sortTable(this,'')">危废类型</th>
                     <!--<th class="text-center">数量</th>-->
                     <!--<th class="text-center">单价</th>-->
                     <!--<th class="text-center">总价</th>-->
-                    <th class="text-center">创建时间</th>
-                    <th class="text-center">入库数量</th>
+                    <th class="text-center" onclick="sortTable(this,'')">创建时间</th>
+                    <th class="text-center" onclick="sortTable(this,'')">入库数量</th>
                     <th class="text-center">操作</th>
                 </tr>
                 </thead>

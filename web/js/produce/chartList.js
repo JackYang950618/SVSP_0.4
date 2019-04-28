@@ -284,9 +284,9 @@ function renderLayer04Right(myChart, list) {
                 ]
             },
             grid: {
-                left: '3%',
+                left: '5%',
                 right: '16%',
-                bottom: '3%',
+                bottom: '10%',
                 top: '3%',
                 containLabel: true
             },
@@ -395,11 +395,12 @@ function setBarConfig(myChart) {
     var option = {
         //--------------    标题 title  ----------------
         title: {
-            text: '',
+            text: '危废合同签约量条形图',
             textStyle: {                 //---主标题内容样式
-                color: 'black'
+                color: 'black',
+                size: 7
             },
-            subtext: '危废合同签约量条形图',          //---副标题内容样式
+            subtext: '',          //---副标题内容样式
             subtextStyle: {
                 color: 'black'
             },

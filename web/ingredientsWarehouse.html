@@ -145,7 +145,7 @@
                     <a class="btn btn-primary btn-xs" id="function_-356" href="#" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; exportExcel();}"><span
                             class="glyphicon glyphicon-arrow-up"
                             aria-hidden="true"></span> 导出</a>
-                    <a class="btn btn-primary btn-xs" href="ingredientReceiveAndSendTable.html" onclick=""><span
+                    <a class="btn btn-primary btn-xs" id="function_-597" onclick="checkAuthority($(this))" href="ingredientReceiveAndSendTable.html"><span
                             class="glyphicon glyphicon-arrow-up"
                             aria-hidden="true"></span> 收发汇总表</a>
                 </div>
@@ -264,18 +264,18 @@
                                 </label>
                             </th>
                             <th class="text-center" hidden>编号</th>
-                            <th class="text-center">物品编码</th>
-                            <th class="text-center">物品名称</th>
-                            <th class="text-center">规格</th>
-                            <th class="text-center">计量单位</th>
-                            <th class="text-center">库存量</th>
-                            <th class="text-center">仓库</th>
-                            <th class="text-center">入库单</th>
-                            <th class="text-center">入库数</th>
-                            <th class="text-center">入库单价</th>
-                            <th class="text-center">出库单</th>
-                            <th class="text-center">出库数</th>
-                            <th class="text-center">出库单价</th>
+                            <th class="text-center" onclick="sortTable(this,'')">物品编码</th>
+                            <th class="text-center" onclick="sortTable(this,'')">物品名称</th>
+                            <th class="text-center" onclick="sortTable(this,'')">规格</th>
+                            <th class="text-center" onclick="sortTable(this,'')">计量单位</th>
+                            <th class="text-center" onclick="sortTable(this,'')">库存量</th>
+                            <th class="text-center" onclick="sortTable(this,'')">仓库</th>
+                            <th class="text-center" onclick="sortTable(this,'')">入库单</th>
+                            <th class="text-center" onclick="sortTable(this,'')">入库数</th>
+                            <th class="text-center" onclick="sortTable(this,'')">入库单价</th>
+                            <th class="text-center" onclick="sortTable(this,'')">出库单</th>
+                            <th class="text-center" onclick="sortTable(this,'')">出库数</th>
+                            <th class="text-center" onclick="sortTable(this,'')">出库单价</th>
                         </tr>
                         </thead>
                         <tbody id="ingredientsInventoryData">

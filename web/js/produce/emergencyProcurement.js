@@ -264,6 +264,7 @@ function inputSwitchPage() {
 
 //加载应急物资采购列表
 function getEmProcurement() {
+    loadNavigationList();   // 动态菜单加载
     $('.loader').show();
     loadNavigationList();   // 设置动态菜单
     $("#current").find("a").text("当前页：1");
@@ -1123,8 +1124,9 @@ function cancel(item) {
             //contentType: 'application/json;charset=utf-8',
             success:function (result) {
                 if (result != undefined && result.status == "success"){
-                    alert(result.message)
-                    window.location.reload()
+                    alert(result.message);
+                    $("#pageNumber").val(currentPage);   // 设置当前页页数
+                    inputSwitchPage();  // 跳转当前页
                 }
                     },
             error:function (result) {
@@ -1433,7 +1435,7 @@ $('.myclass2').each(function () {
     })
     console.log(data)
 })
-    alert("修改成功")
+    alert("修改成功");
     // window.location.reload()
 
     $.ajax({

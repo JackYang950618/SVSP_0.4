@@ -221,7 +221,7 @@
                     <a class="btn btn-primary btn-xs" href="#" id="function_-162" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; exportExcel();}"><span
                             class="glyphicon glyphicon-arrow-up"
                            aria-hidden="true"></span> 导出</a>
-                    <a class="btn btn-primary btn-xs" id="" onclick="confirmAllCheck()"><span
+                    <a class="btn btn-primary btn-xs" id="function_-622" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; confirmAllCheck();}"><span
                             class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>确认收样</a>
                 </div>
                 <!--查询框-->
@@ -340,12 +340,12 @@
                         <input class="checkbox" type="checkbox" value="option1" aria-label="..." name="allSel" id="allSel" onclick="allSelect()">
                     </label>
                 </th>
-                <th class="text-center">预约单号</th>
-                <th class="text-center">采样点</th>
-                <th class="text-center">检测项目</th>
-                <th class="text-center">送样人</th>
-                <th class="text-center">签收人</th>
-                <th class="text-center">状态</th>
+                <th class="text-center" onclick="sortTable(this,'')">预约单号</th>
+                <th class="text-center" onclick="sortTable(this,'')">采样点</th>
+                <th class="text-center" onclick="sortTable(this,'')">检测项目</th>
+                <th class="text-center" onclick="sortTable(this,'')">送样人</th>
+                <th class="text-center" onclick="sortTable(this,'')">签收人</th>
+                <th class="text-center" onclick="sortTable(this,'')">状态</th>
                 <th class="text-center">操作</th>
             </tr>
             </thead>

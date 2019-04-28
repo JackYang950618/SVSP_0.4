@@ -1097,6 +1097,7 @@ function adjustStock(item) {
 
 //修改页面的初始
 function loadAdjustStock() {
+    loadNavigationList();   // 动态菜单加载
     //获取申报编号
     $('.selectpicker').selectpicker({
         language: 'zh_CN',
@@ -1438,7 +1439,8 @@ function cancel(item) {
             success: function (result) {
                 if (result != undefined && result.status == "success") {
                     alert("作废成功！");
-                    location.reload();
+                    $("#pageNumber").val(currentPage);   // 设置当前页页数
+                    inputSwitchPage();  // 跳转当前页
                 }
                 else {
                     alert("作废失败")
@@ -2290,8 +2292,10 @@ function showPerfect() {
                 if (result != undefined && result.status == "success") {
                     index++;
                     if(index==$('.myclass2').length){
-                        alert(result.message)
-                        window.location.reload()
+                        alert(result.message);
+                        $("#pageNumber").val(currentPage);   // 设置当前页页数
+                        inputSwitchPage();  // 跳转当前页
+                        $('#stockInfoForm').modal('hide');
                     }
 
                 }

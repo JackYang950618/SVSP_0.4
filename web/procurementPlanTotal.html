@@ -145,7 +145,7 @@
                             <!--class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新增</a>-->
                     <!--<a class="btn btn-primary btn-xs" href="ingredientsIn.html"><span-->
                             <!--class="glyphicon glyphicon-chevron-left" href="ingredientsIn.html" id="function_-336" onclick="checkAuthority($(this))" aria-hidden="true"></span> 归类入库单</a>-->
-                    <a class="btn btn-primary btn-xs" href="#" id="function_-338" href="#" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; exportExcel();}"><span
+                    <a class="btn btn-primary btn-xs" id="function_-695" href="#" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; exportExcel();}"><span
                             class="glyphicon glyphicon-arrow-up"
                             aria-hidden="true"></span> 导出</a>
                 </div>
@@ -257,17 +257,17 @@
                                        id="allSel" onclick="allSelect()">
                             </label>
                         </th>
-                        <th class="text-center">序号</th>
-                        <th class="text-center">申请日期</th>
-                        <th class="text-center">物资类别</th>
-                        <th class="text-center">物资名称</th>
-                        <th class="text-center">规格型号</th>
-                        <th class="text-center">单位</th>
-                        <th class="text-center">申购部门</th>
-                        <th class="text-center">需求数量</th>
-                        <th class="text-center">单价(元)</th>
-                        <th class="text-center">预计金额(元)</th>
-                        <th class="text-center">备注</th>
+                        <th class="text-center" onclick="sortTable(this,'')">序号</th>
+                        <th class="text-center" onclick="sortTable(this,'')">申请日期</th>
+                        <th class="text-center" onclick="sortTable(this,'')">物资类别</th>
+                        <th class="text-center" onclick="sortTable(this,'')">物资名称</th>
+                        <th class="text-center" onclick="sortTable(this,'')">规格型号</th>
+                        <th class="text-center" onclick="sortTable(this,'')">单位</th>
+                        <th class="text-center" onclick="sortTable(this,'')">申购部门</th>
+                        <th class="text-center" onclick="sortTable(this,'')">需求数量</th>
+                        <th class="text-center" onclick="sortTable(this,'')">单价(元)</th>
+                        <th class="text-center" onclick="sortTable(this,'')">预计金额(元)</th>
+                        <th class="text-center" onclick="sortTable(this,'')">备注</th>
                         <!--<th class="text-center">操作</th>-->
                     </tr>
                     </thead>

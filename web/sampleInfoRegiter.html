@@ -225,7 +225,7 @@
                             class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 导入</a>
                     <a class="btn btn-primary btn-xs" id="function_-186" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; exportExcel();}"><span
                             class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 导出</a>
-                    <a class="btn btn-primary btn-xs" id="" onclick="confirmAllCheck()"><span
+                    <a class="btn btn-primary btn-xs" id="function_-621" onclick="check(this); function check(e){if(!checkAuthority($(e))) return false; confirmAllCheck();}"><span
                             class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>确认收样</a>
                 </div>
                 <!--查询框-->
@@ -359,16 +359,16 @@
                                    id="allSel" onclick="allSelect()">
                         </label>
                     </th>
-                    <th class="text-center">预约单号</th>
-                    <th class="text-center">联单编号</th>
-                    <th class="text-center">产废单位</th>
-                    <th class="text-center">危废名称</th>
-                    <th class="text-center">危废代码</th>
-                    <th class="text-center">危废形态</th>
-                    <th class="text-center">检测项目</th>
-                    <th class="text-center">送样人</th>
-                    <th class="text-center">签收人</th>
-                    <th class="text-center">状态</th>
+                    <th class="text-center" onclick="sortTable(this,'')">预约单号</th>
+                    <th class="text-center" onclick="sortTable(this,'')">联单编号</th>
+                    <th class="text-center" onclick="sortTable(this,'')">产废单位</th>
+                    <th class="text-center" onclick="sortTable(this,'')">危废名称</th>
+                    <th class="text-center" onclick="sortTable(this,'')">危废代码</th>
+                    <th class="text-center" onclick="sortTable(this,'')">危废形态</th>
+                    <th class="text-center" onclick="sortTable(this,'')">检测项目</th>
+                    <th class="text-center" onclick="sortTable(this,'')">送样人</th>
+                    <th class="text-center" onclick="sortTable(this,'')">签收人</th>
+                    <th class="text-center" onclick="sortTable(this,'')">状态</th>
                     <th class="text-center">操作</th>
                 </tr>
                 </thead>

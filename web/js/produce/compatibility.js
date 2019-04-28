@@ -808,7 +808,8 @@ function cancelPw(item) {
             success: function (result) {
                 if (result != undefined && result.status == "success") {
                     alert(result.message);
-                    window.location.reload();
+                    $("#pageNumber").val(currentPage);   // 设置当前页页数
+                    inputSwitchPage();  // 跳转当前页
                 }
                 else {
                     alert(result.message);
@@ -1330,7 +1331,7 @@ function adjust(item) {
 
 //修改页面初始化
 function adjustCom() {
-
+    loadNavigationList();   // 动态菜单加载
     var compatibilityId = localStorage['compatibilityId'];
 
     $("#compatibilityId2").text(compatibilityId);

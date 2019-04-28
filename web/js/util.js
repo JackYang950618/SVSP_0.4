@@ -651,6 +651,7 @@ function getIdFromEquipment(Equipment) {
  * 加载导航条
  */
 function loadNavigationList() {
+    // loadNavigationList();   // 动态菜单加载
     // console.log("旧动态菜单数据");
     // console.log(JSON.parse(localStorage.getItem("menuOrganization")));
     setToDoThingCount(); // 获取并设置待办事项总数
@@ -666,7 +667,9 @@ function loadNavigationList() {
             success: function (result) {
                 if (result != null && result.status === "success") {
                     var obj = JSON.stringify(result.data);
+                    var arr = JSON.stringify(result.firstMenuConfiguration);
                     localStorage.setItem("menuOrganization", obj);
+                    localStorage.setItem("firstMenuConfiguration", arr);
                 }
             },
             error: function (result) {
@@ -714,7 +717,28 @@ function loadNavigationList() {
             setMenuTwo(secondMenuList);//递归设置二级菜单导航条
             var href = window.location.href.toString();
             if (href.substring(href.length - 14) === "firstPage.html") { // 判断是否为板块首页
-                setProcessIcon(secondMenuList); // 首页设置流程节点图标
+                var firstMenuConfiguration = JSON.parse(localStorage.getItem("firstMenuConfiguration"));
+                var newSecondMenuList = [];   // 新二级菜单数据（首页显示节点）
+                if(firstMenuConfiguration != null) {
+                    var firstMenuConfigurationList = firstMenuConfiguration.organizationList;
+                    if(firstMenuConfigurationList != null) {  // 自定义首页数据
+                        $.each(firstMenuConfigurationList,function(index, item) {
+                            if(item.name === localStorage.firstMuneName) {  // 查询到匹配的一级菜单名
+                                if(item.organizationList != null && item.organizationList.length > 0) {  // 自定义首页有数据
+                                    newSecondMenuList = item.organizationList;
+                                    console.log("二级菜单数据更新");
+                                    console.log(newSecondMenuList);
+                                }
+                            }
+                        });
+                    }
+                }
+                if(newSecondMenuList != null && newSecondMenuList.length > 0){
+                    setProcessIcon(newSecondMenuList);
+                }else {
+                    setProcessIcon(secondMenuList); // 首页设置流程节点图标
+                }
+
             }
             // 如果是网页则设置历史记录抬头导航
             if ($("ol[class='breadcrumb']").length > 0) {  // 有历史导航栏的判定为网页
@@ -734,13 +758,24 @@ function loadNavigationList() {
                 // 设置二级菜单选中
                 if ($("ol[class='breadcrumb']").find("li").eq(1).length > 0)  // 更新二级菜单名
                     localStorage.secondMenuName = $("ol[class='breadcrumb']").find("li").eq(1).text();  // 获取二级菜单名
-                $("#navbar").find("a:contains('" + localStorage.secondMenuName + "')").parent().addClass("active");  // 设置二级菜单标蓝
+                $.each($("#navbar").find("a"), function(index,item){
+                    if($.trim($(item).text()) === localStorage.secondMenuName) {    // 精确匹配
+                        $(item).parent().addClass("active");  // 设置二级菜单标蓝
+                    }
+                });
+                // $("#navbar").find("a:contains('" + localStorage.secondMenuName + "')").parent().addClass("active");  // 设置二级菜单标蓝
             }
         }
         // 设置一级菜单选中标蓝
         $("ul[class='sidenav animated fadeInUp']").children().find("span[name='" + localStorage.firstMuneName + "']").parent().parent().addClass("active");
     }
     // 设置代办事项提示
+}
+
+/**
+ * 获取首页节点自定义页面数据
+ */
+function getFirstMenuPageConfigurationList() {
 
 }
 
@@ -886,6 +921,7 @@ function setProcessIcon(organizationList) {
     $("ul[class='nav navbar-nav']").find("li").eq(0).addClass("active");   // 设置首页二级菜单导航栏标蓝
     // console.log("二级菜单数据");
     // console.log(organizationList);
+    var j = 1;   // 计数器
     for (var i = 0; i < organizationList.length; i++) {  // 首页排除
         // if(i == 0){
         //     var br = "<div class='row'></div>";
@@ -893,12 +929,13 @@ function setProcessIcon(organizationList) {
         // }
         var organization = organizationList[i];
         name = organization.name;
-        if (organization.name != "首页") {
+        if (organization.name !== "首页") {
             var div = "<div class='row placeholders'></div>";
-            if ((i - 1) % 3 === 0) { // 三个设置为一行
+            if ((j - 1) % 3 === 0) { // 三个设置为一行
                 $(".page-header").append(div); // 插入新行
             }
-            if (organization.icon != null && organization.icon != "" && organization.url != null && organization.url != "") {
+            j++;
+            if (organization.icon != null && organization.icon !== "" && organization.url != null && organization.url !== "") {
                 var div1 = "<div class='col-xs-3 col-sm-3 col-md-3 placeholder'>" +
                     "<a href='" + organization.url + "' id='function_" + organization.id + "' onclick='checkAuthority($(this));'><img src='" + organization.icon + "' style='width: 80px;height: 80px;border-radius:1px' alt='Generic placeholder thumbnail'></a>" +
                     "<h4>" + organization.name + "</h4></div>";
@@ -1441,4 +1478,103 @@ function getEmail(mail) {
  */
 function emailSettings() {
     $("#emailSettingsModal").modal('show')
+}
+
+/**
+ *  点击表头排序方法
+ *  el  this 当前点击元素
+ *   tbodyId  tbody标签的id (可以不填)
+ *   compareFun  比较函数  内部定义，无需传值
+ * */
+function sortTable(el, tbodyId, compareFun) {
+    // 添加其它列的状态
+    var nowTd = $(el);
+    if (!nowTd.is('th')) {   // 如果元素是th标签
+        nowTd = nowTd.closest('th');  // 获取第一个为th的父标签
+    }
+    nowTd.siblings('th').each(function() {
+        if ($(this).find('[data-dirct]').length) {  // 如果之前存在排序则删除
+            $(this).find('[data-dirct]').attr('data-dirct', '');
+        } else {
+            $(this).attr('data-dirct', '');
+        }
+    });
+    var nowDirct = $(el).attr('data-dirct');
+    var table = $(el).closest('table');
+    //var tbody = $('#' + tbodyId);    // 获取tbody
+    var tbody = nowTd.parent().parent().next();   // 获取tbody
+    if (!nowDirct) {
+        nowDirct = 'asc';
+        $(el).attr('data-dirct', nowDirct);
+    } else {
+        $(el).attr('data-dirct', nowDirct === 'asc' ? 'desc' : 'asc');
+        reverse();
+        //   setSeq();   // 序号重新排序
+        return;
+    }
+
+    /**
+     * 反向排序
+     * */
+    function reverse() {
+        var trs2 = table.find('tr:not(:first)');  // 除去表头，一个数据行
+        for ( var i = trs2.length - 2; i >= 0; i--) {  // 反向插入
+            trs2.eq(i).appendTo(tbody);
+        }
+    }
+
+    /**
+     * 重新设置序号
+     */
+    function setSeq() {
+        var tsq = table.find('.sequence');   // 需要设置序号的列需提前在该列td上设置class='sequence'
+        for ( var i = 0; i < tsq.length; i++) {
+            tsq.eq(i).text((i + 1));
+        }
+    }
+
+    /**
+     * 获取td的值
+     * @param td
+     * @returns {*}
+     */
+    function getTdVal(td) {
+        // var val = td.attr('data-val');   // 获取data-val属性
+        // if (!val) {  // 没有按该td排序则获取该td的内容
+        //     val = $.trim(td.text());
+        // }
+        var val = $.trim(td.text());
+        if (/^[\d\.]+$/.test(val)) {  // 如果该td的内容是数字 则转化为数值类型
+            val = 1 * val;
+        }
+        return val;
+    }
+
+    if (!compareFun) {  // 如果该比较函数未定义则新定义如下：如果str1>str2则返回大于0的数，<则返回小于0的数，=则返回0
+        compareFun = function(str1, str2) {
+            if (typeof str1 === "number" && typeof str2 === "number") {  // 如果两个值都是数值则返回两值之差
+                return str1 - str2;
+            } else {  // 否则返回
+                str1 = '' + str1;
+                str2 = '' + str2;
+                return str1.localeCompare(str2);  // 比较字符串
+            }
+        }
+    }
+    // 得到所有tr 得到单元格位置
+    var trs = $(el).closest('table').find('tr:not(:first)');
+    var index = $(el).closest('th').index();    // 返回该td的相对位置index,即获取该列的列数
+    for ( var i = 0; i < trs.length - 1; i++) {  // 遍历所有数据行
+        for ( var j = 0; j < trs.length - 1 - i; j++) {  // 所有行之间两两进行比较
+            var str1 = getTdVal(trs.eq(j).find('td').eq(index));   // 获取该列的值
+            var str2 = getTdVal(trs.eq(j + 1).find('td').eq(index));
+            if (compareFun(str1, str2) > 0) { // 如果j行比j+1行大
+                trs.eq(j + 1).after(trs.eq(j));  // 调换位置
+                var tmp = trs[j + 1];   // 并将trs中两行的位置进行调换，方便下次遍历比较
+                trs[j + 1] = trs[j];
+                trs[j] = tmp;
+            }
+        }
+    }
+    //  setSeq();  // 设置序号
 }
